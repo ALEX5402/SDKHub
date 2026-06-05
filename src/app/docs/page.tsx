@@ -129,29 +129,6 @@ export default function DocsPage() {
     ]
   }
 }`
-    },
-    {
-      method: "POST",
-      path: "/api/admin/sync",
-      summary: "Manually force sync repositories",
-      description: "Triggers the worker to fetch index feeds from Google CDN and update database records. Protected by Bearer token or username/password body credentials.",
-      requestBody: `{
-  "username": "admin",
-  "password": "yourpassword"
-}`,
-      curlExample: `curl -X POST -H "Content-Type: application/json" -d '{"username":"admin","password":"password"}' "http://localhost:3000/api/admin/sync"`,
-      responseExample: `{
-  "success": true,
-  "message": "Successfully synced 237 tools metadata.",
-  "count": 237,
-  "logs": [
-    {
-      "timestamp": "2026-06-05T18:10:00.000Z",
-      "status": "success",
-      "message": "Successfully synced 237 tools metadata."
-    }
-  ]
-}`
     }
   ];
 

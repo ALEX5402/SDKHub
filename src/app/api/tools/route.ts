@@ -65,6 +65,21 @@ export async function GET(req: NextRequest) {
     if (globalTotal === 0) {
       console.log("Database tools table is empty. Running initial sync worker...");
       await syncUpstream();
+    } else {
+      // Check last successful sync age
+      const lastSyncRes = await turso.execute(
+        "SELECT timestamp FROM sync_logs WHERE status = 'success' ORDER BY timestamp DESC LIMIT 1"
+      );
+      const lastSyncTime = lastSyncRes.rows[0]?.timestamp ? Number(lastSyncRes.rows[0].timestamp) : 0;
+      const now = Date.now();
+      const twentyFourHours = 24 * 60 * 60 * 1000;
+
+      if (now - lastSyncTime > twentyFourHours) {
+        console.log("Last sync was more than 24 hours ago. Triggering background sync...");
+        syncUpstream().catch((err) => {
+          console.error("Background sync failed:", err);
+        });
+      }
     }
 
     // Count query with filters
