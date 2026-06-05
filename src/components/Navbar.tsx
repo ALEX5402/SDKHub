@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Download, Database, LineChart, Terminal } from "lucide-react";
+import { Download, Database, LineChart, Terminal, Github } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -34,27 +34,41 @@ export default function Navbar() {
             </Link>
           </div>
           
-          <nav className="flex space-x-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname === item.href;
+          <div className="flex items-center space-x-4">
+            <nav className="flex space-x-2">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center space-x-2 rounded-lg px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 border ${
-                    isActive
-                      ? "bg-[#0D1324] text-emerald-400 border-[#1E293B] shadow-[0_0_15px_-3px_rgba(16,185,129,0.15)]"
-                      : "text-slate-400 border-transparent hover:bg-slate-900/50 hover:border-slate-800/40 hover:text-slate-200"
-                  }`}
-                >
-                  <Icon className={`h-3.5 w-3.5 ${isActive ? "text-emerald-400" : "text-slate-400 group-hover:text-slate-300"}`} />
-                  <span className="font-mono text-xs">{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center space-x-2 rounded-lg px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 border ${
+                      isActive
+                        ? "bg-[#0D1324] text-emerald-400 border-[#1E293B] shadow-[0_0_15px_-3px_rgba(16,185,129,0.15)]"
+                        : "text-slate-400 border-transparent hover:bg-slate-900/50 hover:border-slate-800/40 hover:text-slate-200"
+                    }`}
+                  >
+                    <Icon className={`h-3.5 w-3.5 ${isActive ? "text-emerald-400" : "text-slate-400 group-hover:text-slate-300"}`} />
+                    <span className="font-mono text-xs">{item.label}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="h-4 w-[1px] bg-slate-800/80 hidden md:block"></div>
+
+            <a
+              href="https://github.com/ALEX5402/SDKHub"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1.5 rounded-lg border border-slate-800 bg-[#0D1324]/40 px-3 py-1.5 text-xs font-semibold tracking-wide text-slate-300 transition-all duration-300 hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 shadow-sm font-mono"
+            >
+              <Github className="h-3.5 w-3.5" />
+              <span>Edit this page</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>
