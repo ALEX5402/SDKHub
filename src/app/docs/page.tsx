@@ -41,6 +41,7 @@ export default function DocsPage() {
         { name: "version", type: "string", required: false, description: "Filter by exact version number" },
         { name: "os", type: "string", required: false, description: "Filter by OS compatibility (windows, macosx, linux)" },
         { name: "arch", type: "string", required: false, description: "Filter by target CPU architecture (x86_64, arm64, x86)" },
+        { name: "q", type: "string", required: false, description: "General keyword query to search across name and version (e.g. 26.2.11394342)" },
         { name: "page", type: "integer", required: false, description: "Page index (starts at 1, defaults to 1)" },
         { name: "limit", type: "integer", required: false, description: "Items per page (max 100, defaults to 20)" },
       ],

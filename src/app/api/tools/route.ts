@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     const version = searchParams.get("version");
     const os = searchParams.get("os");
     const arch = searchParams.get("arch");
+    const q = searchParams.get("q");
     
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
     const limit = Math.max(1, Math.min(100, parseInt(searchParams.get("limit") || "20", 10)));
@@ -49,6 +50,10 @@ export async function GET(req: NextRequest) {
     if (arch) {
       conditions.push("arch = ?");
       args.push(arch.toLowerCase());
+    }
+    if (q) {
+      conditions.push("(name LIKE ? OR version LIKE ?)");
+      args.push(`%${q.toLowerCase()}%`, `%${q}%`);
     }
 
     const whereClause = conditions.length > 0 ? "WHERE " + conditions.join(" AND ") : "";

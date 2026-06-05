@@ -111,8 +111,10 @@ export default function Home() {
       
       if (selectedCategory !== "all") {
         url += `&name=${selectedCategory}`;
-      } else if (searchTerm) {
-        url += `&name=${searchTerm}`;
+      }
+      
+      if (searchTerm) {
+        url += `&q=${encodeURIComponent(searchTerm)}`;
       }
 
       if (selectedOS !== "all") {
