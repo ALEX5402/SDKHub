@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import { turso, initDatabase } from "@/lib/turso";
 
 export const dynamic = "force-dynamic";
@@ -42,6 +43,11 @@ function formatBytes(bytes: number) {
 export default async function ToolDetailsPage({ params }: PageProps) {
   await initDatabase();
   const { name, version } = await params;
+
+  const headersList = await headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const origin = `${protocol}://${host}`;
 
   const decodedName = decodeURIComponent(name);
   const decodedVersion = decodeURIComponent(version);
@@ -208,7 +214,7 @@ export default async function ToolDetailsPage({ params }: PageProps) {
               <div className="bg-[#05070F] rounded-lg p-3 border border-slate-800/80 overflow-x-auto relative">
                 <code className="text-[10px] font-mono text-emerald-400/90 whitespace-nowrap block leading-relaxed">
                   curl -L -o "{packages[0].name}.zip" \<br />
-                  &nbsp;&nbsp;"http://localhost:3000/api/tools/download?name={packages[0].name}&version={packages[0].version}&os={packages[0].os}&arch={packages[0].arch}"
+                  &nbsp;&nbsp;"{origin}/api/tools/download?name={packages[0].name}&version={packages[0].version}&os={packages[0].os}&arch={packages[0].arch}"
                 </code>
               </div>
             </div>

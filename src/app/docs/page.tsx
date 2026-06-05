@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Terminal, 
   ChevronRight, 
@@ -154,8 +154,17 @@ export default function DocsPage() {
     }
   ];
 
+  const [origin, setOrigin] = useState("http://localhost:3000");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
+
   const handleCopy = (text: string, idx: number) => {
-    navigator.clipboard.writeText(text);
+    const adjustedText = text.replace("http://localhost:3000", origin);
+    navigator.clipboard.writeText(adjustedText);
     setCopiedIndex(idx);
     setTimeout(() => setCopiedIndex(null), 2000);
   };
@@ -301,7 +310,7 @@ export default function DocsPage() {
                   </button>
                 </div>
                 <div className="bg-[#05070F] rounded-xl border border-slate-800/60 p-4 overflow-x-auto font-mono text-xs text-emerald-400/90 relative">
-                  <pre>{ep.curlExample}</pre>
+                  <pre>{ep.curlExample.replace("http://localhost:3000", origin)}</pre>
                 </div>
               </div>
 

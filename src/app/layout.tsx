@@ -27,11 +27,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#070A13] text-[#E2E8F0] selection:bg-emerald-500/30 selection:text-emerald-300">
         <Navbar />
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 w-full px-4 sm:px-8 lg:px-12 py-8">
           {children}
         </main>
         <footer className="w-full border-t border-[#1E293B] bg-[#070A13] py-6 text-center text-xs text-slate-500">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+          <div className="w-full px-4 sm:px-8 lg:px-12 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
             <p>© {new Date().getFullYear()} SDKHub (Inspired by fdroid tools). All rights reserved.</p>
             <div className="flex space-x-4">
               <Link href="/docs" className="hover:text-slate-300 transition-colors">API Docs</Link>
