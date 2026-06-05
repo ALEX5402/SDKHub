@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",
-    "@libsql/win32-x64-msvc": "^0.5.29",
     "@types/bcryptjs": "^2.4.6",
     "@types/crypto-js": "^4.2.1",
     "bcryptjs": "^2.4.3",
